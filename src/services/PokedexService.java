@@ -47,7 +47,44 @@ public class PokedexService {
         }
     }
 
-    
+    //UPDATE
+    public void update() {
+        try (Session session = HibernateConfig.getSessionFactory().openSession()) {
+
+            Transaction transaction = session.beginTransaction();
+
+            Pokedex px = session.get(Pokedex.class, (long) id);
+
+            if (px != null) {
+                px.setNome(nome);
+                px.setPeso(peso);
+                px.setMisc(misc);
+
+                session.update(px);
+            }
+
+            transaction.commit();
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
+
+    // DELETE
+    public void delete() {
+
+        try (Session session = HibernateConfig.getSessionFactory().openSession()) {
+
+            Transaction transaction = session.beginTransaction();
+
+            session.createQuery("DELETE FROM Pokedex").executeUpdate();
+
+            transaction.commit();
+
+        } catch (Exception e) {
+            System.out.println("Error: " + e.getMessage());
+        }
+    }
     
     
 }

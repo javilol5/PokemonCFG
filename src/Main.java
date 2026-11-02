@@ -26,10 +26,18 @@ public class Main {
 
         pokeSer.read();
 
-
         //Modificar duas entradas na pokedex
+
+        pokeSer.update(1, "Pikachu Modificado", 250, "Pokemon electrico modificado");
+        pokeSer.update(2, "Bulbasaur Modificado", 15, "Pokemon planta modificado");
+
         //Listar pokemons na pokedex
+
+        pokeSer.read();
+
         //Eliminar tódo-los pokemons na pokedex
+
+        pokeSer.delete();
 
         //2
 

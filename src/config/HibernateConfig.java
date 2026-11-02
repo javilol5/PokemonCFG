@@ -1,11 +1,14 @@
 package config;
-
+/*
 import model.Pokedex;
+import model.Adestrador;
+import model.Pokemon;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
+import java.utils.*;
 
 public class HibernateConfig {
 
@@ -40,4 +43,4 @@ public class HibernateConfig {
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
-}
+}*/
