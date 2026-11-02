@@ -1,5 +1,5 @@
 package config;
-/*
+
 import model.Pokedex;
 import model.Adestrador;
 import model.Pokemon;
@@ -43,4 +43,4 @@ public class HibernateConfig {
     public static SessionFactory getSessionFactory() {
         return sessionFactory;
     }
-}*/
+}
