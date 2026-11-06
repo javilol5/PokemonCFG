@@ -10,6 +10,9 @@ public class Main {
         PokedexService pokeSer = new PokedexService();
 
         //Inserir 10 pokemons en la tabla pokedex
+        System.out.println();
+        System.out.println("Insertando 10 pokemons en la tabla pokedex");
+        System.out.println();
 
         pokeSer.create(1, "Pikachu", 25, "El raton electrico");
         pokeSer.create(2, "Bulbasaur", 1, "El pokemon planta");
@@ -23,19 +26,31 @@ public class Main {
         pokeSer.create(10, "Poliwag", 60, "El pokemon agua");
 
         //Listar pokemons na pokedex
+        System.out.println();
+        System.out.println("Listando pokemons en la tabla pokedex");
+        System.out.println();
 
         pokeSer.read();
 
         //Modificar duas entradas na pokedex
+        System.out.println();
+        System.out.println("Modificando 2 entradas en la tabla pokedex");
+        System.out.println();
 
         pokeSer.update(1, "Pikachu Modificado", 250, "Pokemon electrico modificado");
         pokeSer.update(2, "Bulbasaur Modificado", 15, "Pokemon planta modificado");
 
         //Listar pokemons na pokedex
+        System.out.println();
+        System.out.println("Listando pokemons en la tabla pokedex");
+        System.out.println();
 
         pokeSer.read();
 
         //Eliminar tódo-los pokemons na pokedex
+        System.out.println();
+        System.out.println("Eliminando todos los pokemons en la tabla pokedex");
+        System.out.println();
 
         pokeSer.delete();
 

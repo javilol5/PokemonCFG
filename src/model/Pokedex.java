@@ -5,7 +5,10 @@ import javax.persistence.Entity;
 
 @Entity
 @Table(name = "pokedex")
-public class Pokedex{
+public class Pokedex {
+
+    public Pokedex() {
+    }
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

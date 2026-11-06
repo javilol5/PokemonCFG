@@ -48,7 +48,7 @@ public class PokedexService {
     }
 
     //UPDATE
-    public void update() {
+    public void update(int id, String nome, double peso, String misc) {
         try (Session session = HibernateConfig.getSessionFactory().openSession()) {
 
             Transaction transaction = session.beginTransaction();
@@ -85,6 +85,5 @@ public class PokedexService {
             System.out.println("Error: " + e.getMessage());
         }
     }
-    
-    
+
 }

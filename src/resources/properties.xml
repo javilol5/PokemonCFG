@@ -4,16 +4,14 @@
         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
     <session-factory>
-
-        <property name="connection.url">jdbc:postgresql://10.0.2.15:5432/probas</property>
-        <property name="connection.driver_class">org.postgresql.Driver</property>
-        <property name="connection.username">postgres</property>
-        <property name="connection.password">admin</property>
-        <property name="hibernate.dialect">org.hibernate.dialect.PostgresPlusDialect</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://10.0.9.226:5432/probas</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.connection.password">admin</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
         <property name="hibernate.show_sql">false</property>
         <property name="hibernate.format_sql">false</property>
-
-
+        <property name="hibernate.hbm2ddl.auto">update</property>
 
         <mapping class="model.Pokedex"/>
     </session-factory>

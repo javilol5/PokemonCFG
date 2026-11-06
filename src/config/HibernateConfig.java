@@ -1,14 +1,11 @@
 package config;
 
 import model.Pokedex;
-import model.Adestrador;
-import model.Pokemon;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.Metadata;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import java.utils.*;
 
 public class HibernateConfig {
 
@@ -17,26 +14,38 @@ public class HibernateConfig {
 
     static {
         try {
-            // Se elimina "resources/" para que busque directamente en el classpath
-            standardServiceRegistry = new StandardServiceRegistryBuilder().configure("resources/properties.xml").build();
-            MetadataSources metadataSources = new MetadataSources(standardServiceRegistry);
+            StandardServiceRegistryBuilder registryBuilder =
+                    new StandardServiceRegistryBuilder().configure("resources/properties.xml");
 
-            // Registramos explícitamente las entidades mapeadas con @Entity
-           // metadataSources.addAnnotatedClass(Pokedex.class);
-            // metadataSources.addAnnotatedClass(javier.casal.model.Adestrador.class); // Descomentar cuando la anotes
-            // metadataSources.addAnnotatedClass(javier.casal.model.Pokemon.class);    // Descomentar cuando la anotes
+            applyEnvironmentSetting(registryBuilder, "POKEDEX_DB_URL", "hibernate.connection.url");
+            applyEnvironmentSetting(registryBuilder, "POKEDEX_DB_USER", "hibernate.connection.username");
+            applyEnvironmentSetting(registryBuilder, "POKEDEX_DB_PASSWORD", "hibernate.connection.password");
+
+            standardServiceRegistry = registryBuilder.build();
+
+            MetadataSources metadataSources = new MetadataSources(standardServiceRegistry);
+            metadataSources.addAnnotatedClass(Pokedex.class);
 
             Metadata metadata = metadataSources.getMetadataBuilder().build();
             sessionFactory = metadata.getSessionFactoryBuilder().build();
-
         } catch (Exception e) {
-            // Mostramos el error real en la consola en lugar de ocultarlo
-            System.err.println("Erro ao inicializar a SessionFactory de Hibernate:");
-            e.printStackTrace();
-
             if (standardServiceRegistry != null) {
                 StandardServiceRegistryBuilder.destroy(standardServiceRegistry);
             }
+            String message = "No se pudo inicializar Hibernate. Comprueba que PostgreSQL esté accesible y "
+                    + "configura POKEDEX_DB_URL (actualmente: "
+                    + System.getenv().getOrDefault(
+                            "POKEDEX_DB_URL", "jdbc:postgresql://10.0.9.226:5432/probas")
+                    + ").";
+            throw new ExceptionInInitializerError(new IllegalStateException(message, e));
+        }
+    }
+
+    private static void applyEnvironmentSetting(
+            StandardServiceRegistryBuilder builder, String environmentVariable, String setting) {
+        String value = System.getenv(environmentVariable);
+        if (value != null && !value.isBlank()) {
+            builder.applySetting(setting, value);
         }
     }
 
